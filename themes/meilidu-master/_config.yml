@@ -1,7 +1,8 @@
 menu:
+ Home: /
+ Resources: /resources
  Archive: /archives
- Tags: /tags
- RSS: /atom.xml
+#  RSS: /atom.xml
 
 widgets:
  - greeting
