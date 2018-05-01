@@ -3,7 +3,7 @@ title: Resources
 date: 2018-04-29 10:56:33
 ---
 
-Helpful links for residents of the EOP.
+Helpful links for current and future residents of the EOP.
 
 Forms
 -----
