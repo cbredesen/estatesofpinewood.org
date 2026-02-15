@@ -1,0 +1,24 @@
+baseURL = "https://estatesofpinewood.org/"
+languageCode = "en-us"
+title = "Estates of Pinewood"
+
+[params]
+  subtitle = "A residential community in Altamonte Springs, FL"
+  contactEmail = "info@estatesofpinewood.org"
+  description = "Estates of Pinewood (EOP) is a residential community in Altamonte Springs, Florida."
+
+[taxonomies]
+
+[menus]
+  [[menus.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menus.main]]
+    name = "Resources"
+    url = "/resources/"
+    weight = 2
+  [[menus.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 3

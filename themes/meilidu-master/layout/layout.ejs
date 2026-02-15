@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#33474d">
+	<title><% if(page.title){ %><%= page.title %> | <% } %><%= config.title %></title>
+	<link rel="stylesheet" href="/css/style.css" />
+	<% if (theme.rss){ %>
+      <link rel="alternate" href="<%- theme.rss %>" title="<%= config.title %>" type="application/atom+xml">
+    <% } %>
+</head>
+
+<body>
+
+	<header class="header">
+		<nav class="header__nav">
+			<% for(let key in theme.menu) { %>
+				<a href="<%= theme.menu[key] %>" class="header__link"><%= key %></a>
+			<% } %>
+		</nav>
+		<h1 class="header__title"><a href="<%- url_for() %>"><%= config.title %></a></h1>
+		<h2 class="header__subtitle"><%- config.subtitle %></h2>
+	</header>
+
+	<main>
+		<%- body %>
+	</main>
+
+	<%- partial('footer') %>
+
+
+</body>
+
+</html>

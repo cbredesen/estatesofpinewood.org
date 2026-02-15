@@ -1,0 +1,34 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="hero-image">
+    <img src="/img/eop_entrance.jpg" alt="Estates of Pinewood entrance">
+  </div>
+  <div class="hero-overlay">
+    <h1>Estates of Pinewood</h1>
+    <p>{{ .Site.Params.subtitle }}</p>
+  </div>
+</section>
+
+<section class="content-section welcome">
+  <div class="container">
+    {{ .Content }}
+  </div>
+</section>
+
+<section class="content-section highlights">
+  <div class="container">
+    <div class="card-grid">
+      <a href="/resources/" class="card">
+        <div class="card-icon">&#128196;</div>
+        <h3>Resources</h3>
+        <p>HOA documents, government links, and community information.</p>
+      </a>
+      <a href="/contact/" class="card">
+        <div class="card-icon">&#9993;</div>
+        <h3>Contact</h3>
+        <p>Questions? Get in touch with the HOA board.</p>
+      </a>
+    </div>
+  </div>
+</section>
+{{ end }}

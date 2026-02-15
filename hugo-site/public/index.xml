@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Welcome to Estates of Pinewood on Estates of Pinewood</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content in Welcome to Estates of Pinewood on Estates of Pinewood</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Contact</title>
+      <link>http://localhost:1313/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/contact/</guid>
+      <description>&lt;p&gt;Have a question about the community or the HOA? We&amp;rsquo;d love to hear from you.&lt;/p&gt;&#xA;&lt;p&gt;The best way to reach us is by email:&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;mailto:info@estatesofpinewood.org&#34;&gt;info@estatesofpinewood.org&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;We&amp;rsquo;ll do our best to get back to you promptly.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Resources</title>
+      <link>http://localhost:1313/resources/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/resources/</guid>
+      <description>&lt;p&gt;Helpful links for current and future residents of the EOP.&lt;/p&gt;&#xA;&lt;h2 id=&#34;forms--documents&#34;&gt;Forms &amp;amp; Documents&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/docs/eop_covenants.pdf&#34;&gt;Declaration of Covenants (by-laws)&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;http://localhost:1313/docs/eop_arc.pdf&#34;&gt;Architectural Review Application&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;government&#34;&gt;Government&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.seminolecountyfl.gov&#34;&gt;Seminole County&lt;/a&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.seminolecountyfl.gov/departments-services/environmental-services/solid-waste-management/&#34;&gt;Solid Waste Management&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://www.seminolesheriff.org&#34;&gt;Seminole County Sheriff&amp;rsquo;s Office&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;social&#34;&gt;Social&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://nextdoor.com/invite/hhgccccgdypuqvbgfdda&#34;&gt;Nextdoor - Bunnell / Eden Park&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>
