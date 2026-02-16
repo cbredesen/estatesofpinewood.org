@@ -169,6 +169,15 @@ h1, h2, h3, h4 {
   padding: 2rem;
 }
 
+.hero-logo {
+  max-width: 480px;
+  width: 80%;
+  height: auto;
+  margin-top: 4rem;
+  margin-bottom: 0.5rem;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
 .hero-overlay h1 {
   font-size: 3rem;
   color: var(--color-white);
