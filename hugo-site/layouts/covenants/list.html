@@ -1,0 +1,25 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    <p class="page-header-subtitle">Declaration of Covenants, Conditions and Restrictions</p>
+  </div>
+</section>
+<section class="content-section">
+  <div class="container covenants-toc">
+    {{ .Content }}
+    <nav class="toc-list">
+      {{ range .Pages.ByWeight }}
+      <a href="{{ .RelPermalink }}" class="toc-item">
+        <span class="toc-item-number">{{ .Params.article_number }}</span>
+        <span class="toc-item-title">{{ .Title }}</span>
+        <span class="toc-item-arrow">&rarr;</span>
+      </a>
+      {{ end }}
+    </nav>
+    <p class="covenants-pdf-link">
+      This content is also available as a <a href="/docs/eop_covenants.pdf">downloadable PDF</a>.
+    </p>
+  </div>
+</section>
+{{ end }}

@@ -7,7 +7,7 @@ Helpful links for current and future residents of the EOP.
 
 ## Forms & Documents
 
-- [Declaration of Covenants (by-laws)](/docs/eop_covenants.pdf)
+- [Declaration of Covenants (by-laws)](/covenants/) | [PDF](/docs/eop_covenants.pdf)
 - [Architectural Review Application](/docs/eop_arc.pdf)
 
 ## Government

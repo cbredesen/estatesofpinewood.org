@@ -337,6 +337,144 @@ h1, h2, h3, h4 {
   border-bottom-color: var(--color-primary-dark);
 }
 
+/* --- Page Header Extras --- */
+.page-header-subtitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  margin-top: 0.25rem;
+}
+
+.page-header-breadcrumb {
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.page-header-breadcrumb a {
+  color: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.page-header-breadcrumb a:hover {
+  color: var(--color-white);
+}
+
+/* --- Covenants TOC --- */
+.covenants-toc > p:first-child {
+  max-width: 720px;
+  color: var(--color-text-light);
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+}
+
+.toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-bottom: none;
+  background: var(--color-white);
+  color: var(--color-text);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.toc-item:first-child {
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.toc-item:last-child {
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.toc-item:hover {
+  background: #f0f7f4;
+  color: var(--color-text);
+}
+
+.toc-item-number {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  min-width: 5.5rem;
+  white-space: nowrap;
+}
+
+.toc-item-title {
+  flex: 1;
+  font-weight: 500;
+}
+
+.toc-item-arrow {
+  color: var(--color-primary-light);
+  font-size: 1.1rem;
+}
+
+.covenants-pdf-link {
+  margin-top: 2rem;
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+}
+
+/* --- Covenants Article --- */
+.covenants-article h2 {
+  font-size: 1.35rem;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.covenants-article h2:first-child {
+  margin-top: 0;
+}
+
+.covenants-article h3 {
+  font-size: 1.1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.covenants-article p {
+  margin-bottom: 1rem;
+}
+
+.covenants-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--color-border);
+}
+
+.covenants-nav-link {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.covenants-nav-prev {
+  text-align: left;
+  max-width: 35%;
+}
+
+.covenants-nav-next {
+  text-align: right;
+  max-width: 35%;
+}
+
+.covenants-nav-toc {
+  white-space: nowrap;
+}
+
 /* --- Footer --- */
 .site-footer {
   background: var(--color-primary-dark);
@@ -447,5 +585,20 @@ h1, h2, h3, h4 {
 
   .page-header h1 {
     font-size: 1.75rem;
+  }
+
+  .toc-item-number {
+    min-width: auto;
+  }
+
+  .covenants-nav {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .covenants-nav-prev,
+  .covenants-nav-next {
+    max-width: 100%;
+    text-align: center;
   }
 }

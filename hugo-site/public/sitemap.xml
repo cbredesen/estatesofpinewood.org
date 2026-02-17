@@ -2,10 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/contact/</loc>
+    <loc>https://estatesofpinewood.org/covenants/preamble/</loc>
   </url><url>
-    <loc>http://localhost:1313/resources/</loc>
+    <loc>https://estatesofpinewood.org/covenants/article-01-definitions/</loc>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://estatesofpinewood.org/covenants/article-02-property-rights/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-03-membership-and-voting-rights/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-04-property-subject-to-declaration/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-05-privacy-walls/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-06-functions-of-the-association/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-07-maintenance-assessments/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-08-architectural-control/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-09-use-restrictions/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-10-setback-and-building-restrictions/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-11-enforcement/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-12-indemnification/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/article-13-general-provisions/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/contact/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/covenants/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/resources/</loc>
+  </url><url>
+    <loc>https://estatesofpinewood.org/</loc>
   </url>
 </urlset>

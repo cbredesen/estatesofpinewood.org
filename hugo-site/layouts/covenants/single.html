@@ -1,0 +1,30 @@
+{{ define "main" }}
+<section class="page-header">
+  <div class="container">
+    <p class="page-header-breadcrumb"><a href="/covenants/">Covenants</a></p>
+    <h1>{{ .Title }}</h1>
+  </div>
+</section>
+<section class="content-section">
+  <div class="container covenants-article">
+    {{ .Content }}
+    <nav class="covenants-nav">
+      {{ with .NextInSection }}
+      <a href="{{ .RelPermalink }}" class="covenants-nav-link covenants-nav-prev">
+        &larr; {{ .Title }}
+      </a>
+      {{ else }}
+      <span></span>
+      {{ end }}
+      <a href="/covenants/" class="covenants-nav-link covenants-nav-toc">Table of Contents</a>
+      {{ with .PrevInSection }}
+      <a href="{{ .RelPermalink }}" class="covenants-nav-link covenants-nav-next">
+        {{ .Title }} &rarr;
+      </a>
+      {{ else }}
+      <span></span>
+      {{ end }}
+    </nav>
+  </div>
+</section>
+{{ end }}
