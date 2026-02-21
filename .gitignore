@@ -1,2 +1,3 @@
 hugo-site/public
 .DS_Store
+hugo-site/.hugo_build.lock
