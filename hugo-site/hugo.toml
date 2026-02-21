@@ -15,10 +15,6 @@ title = "Estates of Pinewood"
     url = "/"
     weight = 1
   [[menus.main]]
-    name = "Covenants"
-    url = "/covenants/"
-    weight = 2
-  [[menus.main]]
     name = "Resources"
     url = "/resources/"
     weight = 3
