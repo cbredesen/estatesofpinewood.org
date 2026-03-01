@@ -23,6 +23,41 @@ fi
 
 CALLER_REF="eop-$(date +%s)"
 S3_ORIGIN="${BUCKET_NAME}.s3.${REGION}.amazonaws.com"
+FUNCTION_NAME="eop-index-rewrite"
+
+# Create CloudFront Function for directory index rewriting
+# (CloudFront DefaultRootObject only covers "/"; this handles /resources, /contact, etc.)
+echo "Creating CloudFront Function for index rewriting..."
+TMPFILE=$(mktemp /tmp/cf-function-XXXXXX.js)
+trap "rm -f ${TMPFILE}" EXIT
+
+cat > "${TMPFILE}" <<'JSCODE'
+function handler(event) {
+    var request = event.request;
+    var uri = request.uri;
+    if (uri.endsWith('/')) {
+        request.uri += 'index.html';
+    } else if (!uri.includes('.')) {
+        request.uri += '/index.html';
+    }
+    return request;
+}
+JSCODE
+
+FUNC_ETAG=$(aws cloudfront create-function \
+  --name "${FUNCTION_NAME}" \
+  --function-config '{"Comment":"Rewrite directory paths to index.html","Runtime":"cloudfront-js-2.0"}' \
+  --function-code "fileb://${TMPFILE}" \
+  --query 'ETag' \
+  --output text)
+
+aws cloudfront publish-function \
+  --name "${FUNCTION_NAME}" \
+  --if-match "${FUNC_ETAG}" > /dev/null
+
+ACCOUNT_ID_EARLY=$(aws sts get-caller-identity --query Account --output text)
+FUNCTION_ARN="arn:aws:cloudfront::${ACCOUNT_ID_EARLY}:function/${FUNCTION_NAME}"
+echo "Function ARN: ${FUNCTION_ARN}"
 
 # Create Origin Access Control
 echo "Creating Origin Access Control..."
@@ -37,7 +72,7 @@ OAC_ID=$(aws cloudfront create-origin-access-control \
   --query 'OriginAccessControl.Id' \
   --output text)
 
-echo "OAC ID: ${OAC_ID}"
+# echo "OAC ID: ${OAC_ID}"
 
 # Create CloudFront distribution
 echo "Creating CloudFront distribution..."
@@ -67,14 +102,23 @@ DIST_CONFIG=$(cat <<EOF
     "ViewerProtocolPolicy": "redirect-to-https",
     "AllowedMethods": {
       "Quantity": 2,
-      "Items": ["GET", "HEAD"]
-    },
-    "CachedMethods": {
-      "Quantity": 2,
-      "Items": ["GET", "HEAD"]
+      "Items": ["GET", "HEAD"],
+      "CachedMethods": {
+        "Quantity": 2,
+        "Items": ["GET", "HEAD"]
+      }
     },
     "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6",
-    "Compress": true
+    "Compress": true,
+    "FunctionAssociations": {
+      "Quantity": 1,
+      "Items": [
+        {
+          "FunctionARN": "${FUNCTION_ARN}",
+          "EventType": "viewer-request"
+        }
+      ]
+    }
   },
   "CustomErrorResponses": {
     "Quantity": 1,
@@ -112,7 +156,7 @@ DIST_DOMAIN=$(aws cloudfront get-distribution \
 
 # Add S3 bucket policy granting CloudFront access
 echo "Setting S3 bucket policy for CloudFront access..."
-ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+ACCOUNT_ID="${ACCOUNT_ID_EARLY}"
 
 BUCKET_POLICY=$(cat <<EOF
 {

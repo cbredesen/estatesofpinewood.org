@@ -46,4 +46,4 @@ INVALIDATION_ID=$(aws cloudfront create-invalidation \
 echo ""
 echo "Deploy complete!"
 echo "  S3 bucket: ${BUCKET_NAME}"
-echo "  CloudFront invalidation: ${INVALIDATION_ID}"
+# echo "  CloudFront invalidation: ${INVALIDATION_ID}"
