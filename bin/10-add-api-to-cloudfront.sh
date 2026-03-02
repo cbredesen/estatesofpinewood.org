@@ -71,17 +71,23 @@ config['Origins']['Quantity'] += 1
 config['Origins']['Items'].append({
     'Id': api_origin_id,
     'DomainName': api_domain,
+    'OriginPath': '',
+    'CustomHeaders': {'Quantity': 0, 'Items': []},
     'CustomOriginConfig': {
         'HTTPPort': 80,
         'HTTPSPort': 443,
         'OriginProtocolPolicy': 'https-only',
-        'OriginSSLProtocols': {'Quantity': 1, 'Items': ['TLSv1.2']}
+        'OriginSslProtocols': {'Quantity': 1, 'Items': ['TLSv1.2']},
+        'OriginReadTimeout': 30,
+        'OriginKeepaliveTimeout': 5
     }
 })
 
 # Add /api/* cache behavior (insert before catch-all default)
 if 'CacheBehaviors' not in config or config['CacheBehaviors'] is None:
     config['CacheBehaviors'] = {'Quantity': 0, 'Items': []}
+elif 'Items' not in config['CacheBehaviors']:
+    config['CacheBehaviors']['Items'] = []
 
 config['CacheBehaviors']['Quantity'] += 1
 config['CacheBehaviors']['Items'].insert(0, {
@@ -95,7 +101,11 @@ config['CacheBehaviors']['Items'].insert(0, {
     },
     'CachePolicyId': '${CACHE_POLICY_DISABLED}',
     'OriginRequestPolicyId': '${ORIGIN_REQUEST_ALL_EXCEPT_HOST}',
-    'Compress': True
+    'Compress': True,
+    'SmoothStreaming': False,
+    'FieldLevelEncryptionId': '',
+    'LambdaFunctionAssociations': {'Quantity': 0, 'Items': []},
+    'FunctionAssociations': {'Quantity': 0, 'Items': []}
 })
 
 print(json.dumps(config))

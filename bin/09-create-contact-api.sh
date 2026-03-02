@@ -26,11 +26,7 @@ echo "Creating HTTP API '${API_NAME}'..."
 API_ID=$(aws apigatewayv2 create-api \
   --name "${API_NAME}" \
   --protocol-type HTTP \
-  --cors-configuration "
-    AllowOrigins=https://${DOMAIN} https://www.${DOMAIN},
-    AllowMethods=POST OPTIONS,
-    AllowHeaders=content-type,
-    MaxAge=86400" \
+  --cors-configuration "{\"AllowOrigins\":[\"https://${DOMAIN}\",\"https://www.${DOMAIN}\"],\"AllowMethods\":[\"POST\",\"OPTIONS\"],\"AllowHeaders\":[\"content-type\"],\"MaxAge\":86400}" \
   --region "${REGION}" \
   --query 'ApiId' \
   --output text)
