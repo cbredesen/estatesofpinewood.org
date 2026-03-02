@@ -22,6 +22,20 @@ trap "rm -f ${TMPFILE}" EXIT
 cat > "${TMPFILE}" <<'JSCODE'
 function handler(event) {
     var request = event.request;
+
+    // Redirect www to non-www
+    var host = request.headers.host && request.headers.host.value;
+    if (host === 'www.estatesofpinewood.org') {
+        return {
+            statusCode: 301,
+            statusDescription: 'Moved Permanently',
+            headers: {
+                location: { value: 'https://estatesofpinewood.org' + request.uri }
+            }
+        };
+    }
+
+    // Rewrite directory paths to index.html
     var uri = request.uri;
     if (uri.endsWith('/')) {
         request.uri += 'index.html';
@@ -49,7 +63,7 @@ echo "Found distribution: ${DIST_ID}"
 echo "Creating CloudFront Function '${FUNCTION_NAME}'..."
 FUNC_ETAG=$(aws cloudfront create-function \
   --name "${FUNCTION_NAME}" \
-  --function-config '{"Comment":"Rewrite directory paths to index.html","Runtime":"cloudfront-js-2.0"}' \
+  --function-config '{"Comment":"Redirect www to non-www; rewrite directory paths to index.html","Runtime":"cloudfront-js-2.0"}' \
   --function-code "fileb://${TMPFILE}" \
   --query 'ETag' \
   --output text)
