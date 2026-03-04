@@ -1,0 +1,182 @@
+specification {
+  element person {
+    style {
+      shape person
+      color green
+    }
+  }
+  element system {
+    style { color blue }
+  }
+  element container {
+    style { color secondary }
+  }
+  element component {
+    style { color muted }
+  }
+}
+
+model {
+
+  person visitor 'Site Visitor' {
+    description 'Community resident or prospective buyer'
+  }
+
+  system website 'Estates of Pinewood' {
+    description 'Static HOA website at estatesofpinewood.org'
+
+    container config 'hugo.toml' {
+      description 'baseURL, title, params (subtitle, contactEmail), main nav menu'
+      style { shape document }
+    }
+
+    container content 'Content (Markdown)' {
+      description 'Source pages authored in Markdown'
+
+      component home '_index.md' {
+        description 'Home page body copy'
+      }
+      component resources 'resources.md' {
+        description 'layout: resources — HOA docs, gov links, social'
+      }
+      component contact 'contact.md' {
+        description 'layout: contact — intro text for form page'
+      }
+      component covenants 'covenants/' {
+        description 'Preamble + Articles 01–13 (each a separate .md file)'
+      }
+    }
+
+    container layouts 'Layouts (Go Templates)' {
+      description 'Hugo template hierarchy'
+
+      component baseof 'baseof.html' {
+        description 'Base wrapper — <head>, header partial, {{ block "main" }}, footer partial'
+      }
+      component headerPartial 'partials/header.html' {
+        description 'Site nav with hamburger toggle (responsive, 768px breakpoint)'
+      }
+      component footerPartial 'partials/footer.html' {
+        description 'Shared site footer'
+      }
+      component indexLayout 'index.html' {
+        description 'Home — hero image + logo overlay + card grid (Resources, Contact)'
+      }
+      component resourcesLayout '_default/resources.html' {
+        description 'Resources page layout'
+      }
+      component contactLayout '_default/contact.html' {
+        description 'Contact form + JS fetch to POST /api/contact. Honeypot field.'
+      }
+      component singleLayout '_default/single.html' {
+        description 'Generic fallback for unmatched content pages'
+      }
+      component covenantsListLayout 'covenants/list.html' {
+        description 'TOC listing all articles ordered by weight; links to PDF'
+      }
+      component covenantsSingleLayout 'covenants/single.html' {
+        description 'Article view with breadcrumb and prev/next in-section nav'
+      }
+    }
+
+    container staticAssets 'Static Assets' {
+      description 'Served verbatim; not processed by Hugo'
+
+      component css 'CSS' {
+        description 'style.css (custom properties: #2c6e49, #dda15e, Playfair Display, Inter)\ntheme-coastal.css, theme-autumn.css'
+        style { shape document }
+      }
+      component images 'Images' {
+        description 'eop_entrance.jpg (hero), eop_logo.svg, eop_logo_white.svg'
+        style { shape document }
+      }
+      component pdfs 'PDFs (docs/)' {
+        description 'eop_covenants.pdf, eop_arc.pdf'
+        style { shape document }
+      }
+    }
+
+    container output 'public/ (Build Output)' {
+      description 'Generated static HTML served to browsers'
+      style { shape storage }
+    }
+  }
+
+  system contactApi '/api/contact' {
+    description 'Contact form backend — accepts POST JSON {name, email, message, website(honeypot)}'
+  }
+
+  system googleFonts 'Google Fonts' {
+    description 'Playfair Display (600,700) + Inter (400,500,600) loaded via <link> in baseof.html'
+  }
+
+  // ── Hugo build pipeline ──────────────────────────────────────────
+  website.config       -> website.layouts   'provides site params & menus to all templates'
+  website.content      -> website.output    'Hugo renders content through matched layout'
+  website.layouts      -> website.output    'compiled into HTML pages'
+  website.staticAssets -> website.output    'copied verbatim'
+
+  // ── Template hierarchy ───────────────────────────────────────────
+  website.layouts.baseof                -> website.layouts.headerPartial      'includes'
+  website.layouts.baseof                -> website.layouts.footerPartial      'includes'
+  website.layouts.indexLayout           -> website.layouts.baseof             'extends (define "main")'
+  website.layouts.resourcesLayout       -> website.layouts.baseof             'extends (define "main")'
+  website.layouts.contactLayout         -> website.layouts.baseof             'extends (define "main")'
+  website.layouts.covenantsListLayout   -> website.layouts.baseof             'extends (define "main")'
+  website.layouts.covenantsSingleLayout -> website.layouts.baseof             'extends (define "main")'
+  website.layouts.singleLayout          -> website.layouts.baseof             'extends (define "main")'
+
+  // ── Content → Layout selection ───────────────────────────────────
+  website.content.home      -> website.layouts.indexLayout              'rendered by (homepage)'
+  website.content.resources -> website.layouts.resourcesLayout          'rendered by (layout: resources)'
+  website.content.contact   -> website.layouts.contactLayout            'rendered by (layout: contact)'
+  website.content.covenants -> website.layouts.covenantsListLayout      'section index rendered by'
+  website.content.covenants -> website.layouts.covenantsSingleLayout    'articles rendered by'
+
+  // ── Runtime ─────────────────────────────────────────────────────
+  visitor                           -> website.output       'browses'
+  website.layouts.contactLayout     -> contactApi           'POST /api/contact (fetch)'
+  website.layouts.baseof            -> googleFonts          'loads fonts (CDN)'
+}
+
+views {
+
+  view index {
+    title 'Estates of Pinewood — Architecture Overview'
+    include *
+    style visitor    { color green }
+    style contactApi { color red }
+    style googleFonts { color amber }
+  }
+
+  view templates of website {
+    title 'Hugo Template Hierarchy'
+    include website.layouts.*
+    include website.layouts
+  }
+
+  view buildPipeline {
+    title 'Hugo Build Pipeline'
+    include website.*
+  }
+
+  view contactFlow {
+    title 'Contact Form Flow'
+    include visitor
+    include website.output
+    include website.layouts.contactLayout
+    include website.layouts.baseof
+    include website.layouts.headerPartial
+    include website.layouts.footerPartial
+    include contactApi
+  }
+
+  view covenants {
+    title 'Covenants Section'
+    include website.content.covenants
+    include website.layouts.covenantsListLayout
+    include website.layouts.covenantsSingleLayout
+    include website.layouts.baseof
+    include website.staticAssets.pdfs
+  }
+}
